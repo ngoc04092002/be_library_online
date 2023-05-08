@@ -1,0 +1,49 @@
+
+spring:
+  #MYSQL
+  datasource:
+    username: ${env.MYSQL_USER}
+    password: ${env.MYSQL_PASSWORD}
+    url: jdbc:mysql://localhost:${env.MYSQL_PORT}/ltw_sql
+
+
+  #The SQL dialect makes Hibernate generate better SQL for the chosen database
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    # Hibernate ddl auto (create, create-drop, validate, update)
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  data:
+    mongodb:
+      database: test
+      uri: mongodb+srv://ngocbeo3387:gjuBiVN7ge7tgWVj@btlttcs.iscuvsj.mongodb.net
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${env.EMAIL_USERNAME}
+    password: ${env.EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+app:
+  frontEndDomain: http://localhost:3000
+  corsEndPoint:
+    - http://localhost:2002
+    - http://localhost:8000
+    - http://localhost:3001
+    - http://localhost:3000
+  auth:
+    tokenCookieName: btl_ttcs
+    tokenExpirationMsec: 604800000
+    tokenSecret: key_privateakshdjasd129p8u91p8j$@
+    claimName: roleCode
+

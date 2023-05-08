@@ -1,0 +1,21 @@
+package ltw.btl.service.clients;
+
+import ltw.btl.dto.clients.ClientResponse;
+import ltw.btl.dto.clients.PasswordRequest;
+import ltw.btl.dto.clients.UpdateClientRequest;
+import ltw.btl.model.client.ClientEntity;
+
+import java.util.List;
+
+public interface IClientService {
+
+    List<ClientEntity> getAllCLients();
+
+    ClientResponse saveClient(ClientEntity clientEntity);
+
+    String updatePassword(PasswordRequest passwordRequest);
+
+    String deleteClient(Long id);
+
+    ClientResponse updateClient(UpdateClientRequest updateClientRequest, String oldEmail);
+}
