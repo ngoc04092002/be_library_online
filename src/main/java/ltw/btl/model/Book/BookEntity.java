@@ -1,15 +1,18 @@
 package ltw.btl.model.Book;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ltw.btl.model.Orders.OrderEntity;
+import ltw.btl.model.review.ReviewEntity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -47,5 +50,14 @@ public class BookEntity implements Serializable {
 
     @Column(name = "quantity_sold", columnDefinition = "int default 0", nullable = false)
     private Integer quantitySold;
+
+    @JsonManagedReference(value = "book_review")
+    @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviewList;
+
+
+    @JsonBackReference(value = "book_rating")
+    @OneToMany(mappedBy = "bookRating", cascade = CascadeType.ALL)
+    private List<RatingEntity> ratingEntities;
 
 }

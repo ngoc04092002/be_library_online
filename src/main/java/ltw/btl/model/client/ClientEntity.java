@@ -1,11 +1,17 @@
 package ltw.btl.model.client;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import ltw.btl.dto.auth.AuthRequestSocial;
 import ltw.btl.dto.auth.UserResponse;
+import ltw.btl.model.review.ReviewEntity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -14,7 +20,8 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @Builder
-public class ClientEntity {
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+public class ClientEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -73,5 +80,10 @@ public class ClientEntity {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
+
+    @JsonBackReference(value = "client_review")
+//    @JsonManagedReference(value = "client_review")
+    @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviewList;
 
 }
