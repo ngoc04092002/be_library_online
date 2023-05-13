@@ -37,4 +37,9 @@ public class OrderController {
     public Boolean deleteAllOrderByName(@RequestBody List<String> names){
         return iOrderService.deleteAllOrderByName(names);
     }
+
+    @DeleteMapping("delete-order/{id}")
+    public Boolean deleteOrderById(@PathVariable Long id){
+        return iOrderService.deleteOrderById(id);
+    }
 }

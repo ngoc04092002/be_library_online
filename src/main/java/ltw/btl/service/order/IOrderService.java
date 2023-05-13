@@ -14,4 +14,6 @@ public interface IOrderService {
     Boolean deleteAllOrderByName(List<String> name);
 
     OrderEntity updateOrderQuantity(Long id,Integer quantity);
+
+    Boolean deleteOrderById(Long id);
 }

@@ -1,4 +1,4 @@
-package ltw.btl.repository;
+package ltw.btl.repository.books;
 
 
 import ltw.btl.model.Orders.OrderEntity;
@@ -23,4 +23,6 @@ public interface IOrderRepo extends JpaRepository<OrderEntity,Long> {
     @Modifying
     @Query(value = "delete from OrderEntity oe where UPPER(oe.name) in ?1")
     void deleteAllOrderByName(List<String> name);
+
+    void deleteById(Long id);
 }

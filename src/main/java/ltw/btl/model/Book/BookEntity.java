@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ltw.btl.model.client.ClientEntity;
 import ltw.btl.model.review.ReviewEntity;
 
 import java.io.Serializable;
@@ -59,5 +60,9 @@ public class BookEntity implements Serializable {
     @JsonBackReference(value = "book_rating")
     @OneToMany(mappedBy = "bookRating", cascade = CascadeType.ALL)
     private List<RatingEntity> ratingEntities;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_client_book_id", referencedColumnName = "id")
+    private ClientEntity clientEntity;
 
 }

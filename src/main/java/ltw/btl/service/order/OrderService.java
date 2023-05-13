@@ -3,7 +3,7 @@ package ltw.btl.service.order;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import ltw.btl.model.Orders.OrderEntity;
-import ltw.btl.repository.IOrderRepo;
+import ltw.btl.repository.books.IOrderRepo;
 import ltw.btl.repository.error.ArgumentException;
 import org.springframework.stereotype.Service;
 
@@ -77,5 +77,16 @@ public class OrderService implements IOrderService {
         }
 
         return currentOrder;
+    }
+
+    @Override
+    public Boolean deleteOrderById(Long id) {
+        try {
+            iOrderRepo.deleteById(id);
+            return true;
+        }catch (Exception ex){
+            System.out.println("order=>>>"+ex.getMessage());
+            return false;
+        }
     }
 }

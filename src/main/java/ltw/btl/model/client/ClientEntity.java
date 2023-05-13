@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import ltw.btl.dto.auth.AuthRequestSocial;
 import ltw.btl.dto.auth.UserResponse;
+import ltw.btl.model.Book.BookEntity;
+import ltw.btl.model.Book.RatingEntity;
 import ltw.btl.model.review.ReviewEntity;
 
 import java.io.Serializable;
@@ -32,7 +34,6 @@ public class ClientEntity implements Serializable {
         this.address = userResponse.address();
         this.gender = userResponse.gender();
         this.password = userResponse.password();
-        this.sdt = "";
         this.avatar = "";
         this.role = "user";
         this.createdAt = LocalDateTime.now();
@@ -44,7 +45,6 @@ public class ClientEntity implements Serializable {
         this.address = "";
         this.gender = "male";
         this.password = encodedPassword;
-        this.sdt = "";
         this.avatar = authRequestSocial.getAvatar();
         this.role = "user";
         this.createdAt = LocalDateTime.now();
@@ -64,8 +64,6 @@ public class ClientEntity implements Serializable {
 
     @Column(name = "avatar", nullable = false, columnDefinition = "varchar(225) default ''")
     private String avatar;
-    @Column(name = "sdt", nullable = false, columnDefinition = "varchar(225) default ''")
-    private String sdt;
 
     @Column(name = "password")
     private String password;
@@ -86,4 +84,7 @@ public class ClientEntity implements Serializable {
     @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL)
     private List<ReviewEntity> reviewList;
 
+    @JsonBackReference(value = "client_book")
+    @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL)
+    private List<BookEntity> bookEntities;
 }

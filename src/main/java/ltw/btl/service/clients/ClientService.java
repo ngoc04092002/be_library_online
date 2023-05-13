@@ -77,9 +77,6 @@ public class ClientService implements IClientService {
         if (StringUtils.isNotBlank(address)) {
             currentClientEntity.setAddress(address);
         }
-        if (StringUtils.isNotBlank(sdt)) {
-            currentClientEntity.setSdt(sdt);
-        }
         if (StringUtils.isNotBlank(avatar)) {
             currentClientEntity.setAvatar(avatar);
         }
