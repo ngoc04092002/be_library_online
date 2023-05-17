@@ -45,7 +45,7 @@ public class BookService implements IBookService {
     public String createBook(BookEntity bookEntity) {
 
         try {
-            BookEntity findBook = iBookRepo.getByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(
+            BookEntity findBook = iBookRepo.getByTitleContainingIgnoreCaseAndAuthorContainingIgnoreCase(
                     bookEntity.getTitle(), bookEntity.getAuthor());
 
             if (findBook != null) {

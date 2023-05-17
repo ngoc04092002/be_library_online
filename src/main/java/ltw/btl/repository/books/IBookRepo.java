@@ -13,7 +13,7 @@ import java.util.List;
 public interface IBookRepo extends JpaRepository<BookEntity, Long> {
     BookEntity getById(Long id);
 
-    BookEntity getByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCase(String title, String author);
+    BookEntity getByTitleContainingIgnoreCaseAndAuthorContainingIgnoreCase(String title, String author);
 
     void deleteById(Long id);
 
