@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ltw.btl.dto.clients.ClientResponse;
 import ltw.btl.dto.clients.PasswordRequest;
 import ltw.btl.dto.clients.UpdateClientRequest;
-import ltw.btl.model.client.ClientEntity;
+import ltw.btl.model.Client.ClientEntity;
 import ltw.btl.repository.clients.IClientRepo;
 import ltw.btl.repository.error.ArgumentException;
 import ltw.btl.repository.error.EditProfileException;

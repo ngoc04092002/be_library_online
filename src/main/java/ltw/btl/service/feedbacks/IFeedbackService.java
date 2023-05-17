@@ -1,6 +1,6 @@
 package ltw.btl.service.feedbacks;
 
-import ltw.btl.model.feedbacks.FeedbackEntity;
+import ltw.btl.model.Feedbacks.FeedbackEntity;
 
 import java.util.List;
 

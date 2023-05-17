@@ -9,8 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ltw.btl.model.client.ClientEntity;
-import ltw.btl.model.client.EWaitingR;
+import ltw.btl.model.Client.ClientEntity;
+import ltw.btl.model.Client.EWaitingR;
 import ltw.btl.repository.clients.IClientRepo;
 import ltw.btl.repository.clients.IEWRRepo;
 import ltw.btl.repository.error.ArgumentException;
@@ -25,7 +25,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class EmailService {
-    final private String senderEmail = "ngocbeo3387@gmail.com";
+    final private String senderEmail = "dungddd111@gmail.com";
     final private JavaMailSender mailSender;
     private final TokenProvider tokenProvider;
     private final IClientRepo iClientRepo;

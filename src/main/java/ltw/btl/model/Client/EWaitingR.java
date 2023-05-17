@@ -1,24 +1,22 @@
-package ltw.btl.model.feedbacks;
+package ltw.btl.model.Client;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "feedbacks")
-@Data
+@Table(name = "EWaitingR")
 @NoArgsConstructor
+@Data
 @AllArgsConstructor
-public class FeedbackEntity {
+@Builder
+public class EWaitingR {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "type")
-    private String type;
-
-    @Column(name = "feedback")
-    private String feedback;
-
+    @Column(name="user_email")
+    private String email;
 }

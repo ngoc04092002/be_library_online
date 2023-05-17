@@ -15,7 +15,7 @@ import ltw.btl.dto.auth.AuthRequest;
 import ltw.btl.dto.auth.AuthRequestSocial;
 import ltw.btl.dto.auth.AuthResponse;
 import ltw.btl.dto.auth.UserResponse;
-import ltw.btl.model.client.ClientEntity;
+import ltw.btl.model.Client.ClientEntity;
 import ltw.btl.repository.error.ArgumentException;
 import ltw.btl.repository.error.ResourceFoundException;
 import ltw.btl.repository.error.ResourceNotFoundException;

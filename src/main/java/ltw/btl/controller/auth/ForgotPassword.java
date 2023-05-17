@@ -4,7 +4,7 @@ package ltw.btl.controller.auth;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ltw.btl.model.client.EWaitingR;
+import ltw.btl.model.Client.EWaitingR;
 import ltw.btl.service.email.EmailService;
 
 import java.util.List;

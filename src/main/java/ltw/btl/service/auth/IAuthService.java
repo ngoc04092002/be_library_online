@@ -2,7 +2,7 @@ package ltw.btl.service.auth;
 
 import ltw.btl.dto.auth.UserResponse;
 import ltw.btl.dto.clients.ClientResponse;
-import ltw.btl.model.client.ClientEntity;
+import ltw.btl.model.Client.ClientEntity;
 
 public interface IAuthService {
 

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ltw.btl.dto.auth.UserResponse;
 import ltw.btl.dto.clients.ClientResponse;
-import ltw.btl.model.client.ClientEntity;
+import ltw.btl.model.Client.ClientEntity;
 import ltw.btl.repository.clients.IClientRepo;
 
 @Service

@@ -1,6 +1,6 @@
 package ltw.btl.dto.clients;
 
-import ltw.btl.model.client.ClientEntity;
+import ltw.btl.model.Client.ClientEntity;
 
 
 public record ClientResponse(Long id, String username, String email, String address, String gender, String avatar,

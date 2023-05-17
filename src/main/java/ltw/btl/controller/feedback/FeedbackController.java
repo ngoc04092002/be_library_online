@@ -2,7 +2,7 @@ package ltw.btl.controller.feedback;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ltw.btl.model.feedbacks.FeedbackEntity;
+import ltw.btl.model.Feedbacks.FeedbackEntity;
 import ltw.btl.service.feedbacks.IFeedbackService;
 
 import java.util.List;

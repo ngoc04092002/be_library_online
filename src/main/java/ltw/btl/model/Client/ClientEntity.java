@@ -1,14 +1,12 @@
-package ltw.btl.model.client;
+package ltw.btl.model.Client;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import ltw.btl.dto.auth.AuthRequestSocial;
 import ltw.btl.dto.auth.UserResponse;
 import ltw.btl.model.Book.BookEntity;
-import ltw.btl.model.Book.RatingEntity;
 import ltw.btl.model.review.ReviewEntity;
 
 import java.io.Serializable;

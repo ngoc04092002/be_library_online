@@ -1,6 +1,6 @@
 package ltw.btl.dto.auth;
 
-import ltw.btl.model.client.ClientEntity;
+import ltw.btl.model.Client.ClientEntity;
 
 public record UserResponse(String username, String email, String address, String gender, String avatar, String password,
                            String role) {

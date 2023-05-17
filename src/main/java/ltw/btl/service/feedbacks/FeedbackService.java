@@ -3,7 +3,7 @@ package ltw.btl.service.feedbacks;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ltw.btl.model.feedbacks.FeedbackEntity;
+import ltw.btl.model.Feedbacks.FeedbackEntity;
 import ltw.btl.repository.feedbacks.IFeedbackRepo;
 
 import java.util.List;

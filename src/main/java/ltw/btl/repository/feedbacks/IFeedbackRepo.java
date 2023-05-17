@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ltw.btl.model.feedbacks.FeedbackEntity;
+import ltw.btl.model.Feedbacks.FeedbackEntity;
 
 import java.util.List;
 

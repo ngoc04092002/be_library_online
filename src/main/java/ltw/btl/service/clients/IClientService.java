@@ -3,7 +3,7 @@ package ltw.btl.service.clients;
 import ltw.btl.dto.clients.ClientResponse;
 import ltw.btl.dto.clients.PasswordRequest;
 import ltw.btl.dto.clients.UpdateClientRequest;
-import ltw.btl.model.client.ClientEntity;
+import ltw.btl.model.Client.ClientEntity;
 
 import java.util.List;
 
