@@ -25,7 +25,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class EmailService {
-    final private String senderEmail = "dungddd111@gmail.com";
+    final private String senderEmail = "ngocbeo3387@gmail.com";
     final private JavaMailSender mailSender;
     private final TokenProvider tokenProvider;
     private final IClientRepo iClientRepo;
