@@ -13,6 +13,7 @@ import ltw.btl.model.review.ReviewEntity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -65,4 +66,11 @@ public class BookEntity implements Serializable {
     @JoinColumn(name = "fk_client_book_id", referencedColumnName = "id")
     private ClientEntity clientEntity;
 
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }
