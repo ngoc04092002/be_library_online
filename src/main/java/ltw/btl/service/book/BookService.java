@@ -49,7 +49,7 @@ public class BookService implements IBookService {
                     bookEntity.getTitle(), bookEntity.getAuthor());
 
             if (findBook != null) {
-                return "Books already exist";
+                return "Sách này đã hiện có";
             }
             Date date1 = bookEntity.getReleaseDate();
             Date date = new Date();
