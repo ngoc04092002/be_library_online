@@ -52,9 +52,14 @@ public class ClientService implements IClientService {
 
 
     @Override
-    public String deleteClient(Long id) {
-        iClientRepo.deleteById(id);
-        return "delete successfully";
+    public Boolean deleteClient(Long id) {
+        try {
+            iClientRepo.deleteById(id);
+            return true;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
 
 

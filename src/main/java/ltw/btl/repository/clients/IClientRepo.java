@@ -10,5 +10,4 @@ public interface IClientRepo extends JpaRepository<ClientEntity, Long> {
 
     ClientEntity findByUsernameOrEmail(String username,String email);
 
-
 }

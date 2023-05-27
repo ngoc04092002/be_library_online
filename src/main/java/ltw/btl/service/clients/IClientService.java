@@ -15,7 +15,7 @@ public interface IClientService {
 
     String updatePassword(PasswordRequest passwordRequest);
 
-    String deleteClient(Long id);
+    Boolean deleteClient(Long id);
 
     ClientResponse updateClient(UpdateClientRequest updateClientRequest, String oldEmail);
 }
