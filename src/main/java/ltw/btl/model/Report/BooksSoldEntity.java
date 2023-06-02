@@ -22,6 +22,8 @@ public class BooksSoldEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "book_id")
+    private Long bookId;
     @Column(name = "month")
     private int month;
 
@@ -29,5 +31,5 @@ public class BooksSoldEntity implements Serializable {
     private int year;
 
     @Column(name = "solds")
-    private Long solds;
+    private Integer solds;
 }

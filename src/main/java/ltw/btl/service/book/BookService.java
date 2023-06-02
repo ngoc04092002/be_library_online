@@ -2,6 +2,7 @@ package ltw.btl.service.book;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import ltw.btl.dto.book.BookRequest;
 import ltw.btl.dto.book.RatingResponse;
 import ltw.btl.model.Book.BookEntity;
 import ltw.btl.model.Book.RatingEntity;
@@ -65,39 +66,41 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public String updateBook(BookEntity bookEntity) {
-        try {
-            String title = bookEntity.getTitle();
-            String author = bookEntity.getAuthor();
-            System.out.println(title + "-" + author);
-            final var findBook = iBookRepo.getByTitleOrAuthor(title, author);
-            System.out.println("2");
-            if (findBook != null && findBook.getId() != bookEntity.getId()) {
-                return "Books already exist";
-            }
+    public String updateBook(BookRequest updateBook) {
+        System.out.println(updateBook.getId());
 
-            final var newBook = BookEntity.builder()
-                    .id(bookEntity.getId())
-                    .author(bookEntity.getAuthor())
-                    .des(bookEntity.getDes())
-                    .pages(bookEntity.getPages())
-                    .quantitySold(bookEntity.getQuantitySold())
-                    .releaseDate(bookEntity.getReleaseDate())
-                    .src(bookEntity.getSrc())
-                    .title(bookEntity.getTitle())
-                    .type(bookEntity.getType())
+        try {
+            String title = updateBook.getTitle();
+            String author = updateBook.getAuthor();
+            final var findBook = iBookRepo.getByTitleOrAuthor(title, author);
+            if (findBook != null && !updateBook.getTitle()
+                    .equalsIgnoreCase(updateBook.getOldTitle()) && !updateBook.getAuthor()
+                    .equalsIgnoreCase(updateBook.getOldAuthor())) {
+                return "Sách đã tồn tại";
+            }
+            final var bookEntity = BookEntity.builder()
+                    .id(updateBook.getId())
+                    .author(updateBook.getAuthor())
+                    .des(updateBook.getDes())
+                    .pages(updateBook.getPages())
+                    .quantitySold(updateBook.getQuantitySold())
+                    .releaseDate(updateBook.getReleaseDate())
+                    .src(updateBook.getSrc())
+                    .title(updateBook.getTitle())
+                    .type(updateBook.getType())
                     .build();
 
-            Date date1 = bookEntity.getReleaseDate();
+            Date date1 = updateBook.getReleaseDate();
             Date date = new Date();
 
 
             if (date1.after(date)) {
                 return "Thời gian đã vượt qua thời điểm hiện tại";
             }
-            iBookRepo.save(newBook);
+            iBookRepo.save(bookEntity);
             return "ok";
         } catch (Exception e) {
+            System.out.println("error update book"+e.getMessage());
             return "Kiểm tra lại dữ liệu đã điền đẩy đủ chưa";
         }
     }
@@ -127,8 +130,8 @@ public class BookService implements IBookService {
     @Override
     public RatingResponse getRatings(Long id) {
         final var rating = iRatingRepo.findByBookRating_Id(id);
-        if(rating==null){
-            return new RatingResponse(0,0,0,0,0);
+        if (rating == null) {
+            return new RatingResponse(0, 0, 0, 0, 0);
         }
         return new RatingResponse(rating);
     }

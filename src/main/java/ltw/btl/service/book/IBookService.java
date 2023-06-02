@@ -1,5 +1,6 @@
 package ltw.btl.service.book;
 
+import ltw.btl.dto.book.BookRequest;
 import ltw.btl.dto.book.RatingResponse;
 import ltw.btl.model.Book.BookEntity;
 import ltw.btl.model.Book.RatingEntity;
@@ -17,7 +18,7 @@ public interface IBookService {
 
     String createBook(BookEntity bookEntity);
 
-    String updateBook(BookEntity bookEntity);
+    String updateBook(BookRequest newBook);
 
     List<BookEntity> filterBooks(String s, Integer limit, Integer offset);
 

@@ -1,6 +1,7 @@
 package ltw.btl.controller.book;
 
 import lombok.RequiredArgsConstructor;
+import ltw.btl.dto.book.BookRequest;
 import ltw.btl.dto.book.RatingRequest;
 import ltw.btl.dto.book.RatingResponse;
 import ltw.btl.model.Book.BookEntity;
@@ -9,8 +10,6 @@ import ltw.btl.service.book.IBookService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -22,7 +21,7 @@ public class BookController {
 
     @GetMapping("books")
     public List<BookEntity> getAllBooks(@RequestParam(defaultValue = "") String type,
-                                        @RequestParam(defaultValue = "") String year) {
+            @RequestParam(defaultValue = "") String year) {
         List<BookEntity> bookEntities = iBookService.getAllBooks();
         if (StringUtils.isNotBlank(type)) {
             bookEntities = bookEntities.stream()
@@ -35,7 +34,7 @@ public class BookController {
                     .filter(b -> {
 
                         System.out.println(b.getReleaseDate()
-                                .getYear() + "-" + b.getReleaseDate());
+                                                   .getYear() + "-" + b.getReleaseDate());
                         return b.getReleaseDate()
                                 .getYear() + 1900 == Integer.parseInt(year);
                     })
@@ -51,7 +50,7 @@ public class BookController {
 
     @GetMapping("filter-book")
     public List<BookEntity> filterBooks(@RequestParam(defaultValue = "") String s,
-                                        @RequestParam(defaultValue = "10") Integer limit, @RequestParam(defaultValue = "0") Integer offset) {
+            @RequestParam(defaultValue = "10") Integer limit, @RequestParam(defaultValue = "0") Integer offset) {
         return iBookService.filterBooks(s, limit, offset);
     }
 
@@ -77,8 +76,8 @@ public class BookController {
     }
 
     @PostMapping("update-book")
-    public String updateBook(@RequestBody BookEntity bookEntity) {
-        return iBookService.updateBook(bookEntity);
+    public String updateBook(@RequestBody BookRequest newBook) {
+        return iBookService.updateBook(newBook);
     }
 
 }

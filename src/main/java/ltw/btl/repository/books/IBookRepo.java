@@ -21,6 +21,10 @@ public interface IBookRepo extends JpaRepository<BookEntity, Long> {
     BookEntity getByTitleOrAuthor(String title, String author);
 
     @Modifying
+    @Query(nativeQuery = true, value = "update books set quantity_sold=quantity_sold+?1 where id=?2")
+    void updateSold(Integer sold, Long id);
+
+    @Modifying
     @Query(nativeQuery = true, value = "select * from books where month(created_at)=?1 and year(created_at)=?2")
     List<BookEntity> getBookReport(Integer month, Integer year);
     @Modifying
