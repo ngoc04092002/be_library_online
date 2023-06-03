@@ -2,7 +2,6 @@ package ltw.btl.controller.book;
 
 import lombok.RequiredArgsConstructor;
 import ltw.btl.dto.book.BookRequest;
-import ltw.btl.dto.book.RatingRequest;
 import ltw.btl.dto.book.RatingResponse;
 import ltw.btl.model.Book.BookEntity;
 import ltw.btl.model.Book.RatingEntity;
@@ -60,12 +59,12 @@ public class BookController {
     }
 
     @PostMapping("save-rating")
-    public RatingEntity saveRating(@RequestBody RatingRequest bookEntity) {
-        return iBookService.saveRating(bookEntity.getBookEntity(), bookEntity.getStar());
+    public RatingEntity saveRating(@RequestBody RatingEntity rating) {
+        return iBookService.saveRating(rating);
     }
 
     @GetMapping("get-rating")
-    public RatingResponse getRating(@RequestParam Long id) {
+    public List<Object[]> getRating(@RequestParam Long id) {
         return iBookService.getRatings(id);
     }
 

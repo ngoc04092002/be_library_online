@@ -50,6 +50,9 @@ public class BookEntity implements Serializable {
     @Column(name = "pages", columnDefinition = "int",nullable = false)
     private Integer pages;
 
+    @Column(name = "price", columnDefinition = "float",nullable = false)
+    private Float price;
+
     @Column(name = "quantity_sold", columnDefinition = "int default 0", nullable = false)
     private Integer quantitySold;
 

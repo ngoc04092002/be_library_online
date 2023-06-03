@@ -17,6 +17,8 @@ public class BookRequest {
     private String author;
     private String type;
     private String des;
+
+    private Float price;
     private String src;
     private Date releaseDate;
     private Integer pages;

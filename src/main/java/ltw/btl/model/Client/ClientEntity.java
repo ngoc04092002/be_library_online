@@ -7,6 +7,7 @@ import lombok.*;
 import ltw.btl.dto.auth.AuthRequestSocial;
 import ltw.btl.dto.auth.UserResponse;
 import ltw.btl.model.Book.BookEntity;
+import ltw.btl.model.Book.RatingEntity;
 import ltw.btl.model.review.ReviewEntity;
 
 import java.io.Serializable;
@@ -85,4 +86,8 @@ public class ClientEntity implements Serializable {
     @JsonBackReference(value = "client_book")
     @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL)
     private List<BookEntity> bookEntities;
+
+    @JsonBackReference(value = "client_rating")
+    @OneToMany(mappedBy = "clientEntity", cascade = CascadeType.ALL)
+    private List<RatingEntity> ratingEntities;
 }

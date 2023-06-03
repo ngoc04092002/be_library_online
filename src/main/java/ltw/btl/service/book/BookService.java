@@ -87,6 +87,7 @@ public class BookService implements IBookService {
                     .releaseDate(updateBook.getReleaseDate())
                     .src(updateBook.getSrc())
                     .title(updateBook.getTitle())
+                    .price(updateBook.getPrice())
                     .type(updateBook.getType())
                     .build();
 
@@ -112,37 +113,13 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public RatingEntity saveRating(BookEntity bookEntity, Integer star) {
-        System.out.println(bookEntity.getId());
-        RatingEntity rating = iRatingRepo.findByBookRating(bookEntity);
-        if (rating != null) {
-            checkRating(star, rating);
-        } else {
-            rating = new RatingEntity();
-            checkRating(star, rating);
-        }
-        rating.setBookRating(bookEntity);
-
-
+    public RatingEntity saveRating(RatingEntity rating) {
         return iRatingRepo.save(rating);
     }
 
     @Override
-    public RatingResponse getRatings(Long id) {
-        final var rating = iRatingRepo.findByBookRating_Id(id);
-        if (rating == null) {
-            return new RatingResponse(0, 0, 0, 0, 0);
-        }
-        return new RatingResponse(rating);
+    public List<Object[]> getRatings(Long id) {
+        return iRatingRepo.findByBookRatingId(id);
     }
 
-    private void checkRating(Integer star, RatingEntity rating) {
-        switch (star) {
-            case 5 -> rating.setFive(rating.getFive() == null ? 1 : rating.getFive() + 1);
-            case 4 -> rating.setFour(rating.getFour() == null ? 1 : rating.getFour() + 1);
-            case 3 -> rating.setThree(rating.getThree() == null ? 1 : rating.getThree() + 1);
-            case 2 -> rating.setTwo(rating.getTwo() == null ? 1 : rating.getTwo() + 1);
-            default -> rating.setOne(rating.getOne() == null ? 1 : rating.getOne() + 1);
-        }
-    }
 }

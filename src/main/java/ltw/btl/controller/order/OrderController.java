@@ -29,8 +29,9 @@ public class OrderController {
     }
 
     @PutMapping("update-order")
-    public OrderEntity updateOrderQuantity(@RequestParam Long id,@RequestParam Integer quantity){
-        return  iOrderService.updateOrderQuantity(id,quantity);
+    public OrderEntity updateOrderQuantity(@RequestParam Long id,@RequestParam Integer quantity,
+            @RequestParam Boolean haveAdd){
+        return  iOrderService.updateOrderQuantity(id,quantity, haveAdd);
     }
 
     @PostMapping("delete-order")
@@ -39,7 +40,7 @@ public class OrderController {
     }
 
     @DeleteMapping("delete-order/{id}")
-    public Boolean deleteOrderById(@PathVariable Long id){
-        return iOrderService.deleteOrderById(id);
+    public Boolean deleteOrderById(@PathVariable Long id,@RequestParam Integer quantity){
+        return iOrderService.deleteOrderById(id, quantity);
     }
 }

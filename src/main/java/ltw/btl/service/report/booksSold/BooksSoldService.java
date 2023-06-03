@@ -5,14 +5,12 @@ import lombok.RequiredArgsConstructor;
 import ltw.btl.model.Report.BooksSoldEntity;
 import ltw.btl.repository.books.IBookRepo;
 import ltw.btl.repository.report.IBooksSoldRepo;
-import ltw.btl.service.book.IBookService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,13 +24,15 @@ public class BooksSoldService implements IBooksSoldService {
         final var currentBookSoldMonth = iBooksSoldRepo.getByMonth(booksSoldEntity.getMonth());
 
         Date date = new Date();
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDate = date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
         int month = localDate.getMonthValue();
         int year = localDate.getYear();
         int currentSold = booksSoldEntity.getSolds();
 
 
-        iBookRepo.updateSold(booksSoldEntity.getSolds(),booksSoldEntity.getBookId());
+        iBookRepo.updateSold(booksSoldEntity.getSolds(), booksSoldEntity.getBookId());
 
         if (currentBookSoldMonth == null) {
             BooksSoldEntity newBooksSoldEntity = new BooksSoldEntity();
@@ -42,11 +42,11 @@ public class BooksSoldService implements IBooksSoldService {
             return iBooksSoldRepo.save(newBooksSoldEntity);
         }
 
-        if(currentBookSoldMonth.getYear()!=year){
+        if (currentBookSoldMonth.getYear() != year) {
             currentBookSoldMonth.setYear(year);
         }
 
-        currentBookSoldMonth.setSolds(currentSold);
+        currentBookSoldMonth.setSolds(currentSold + currentBookSoldMonth.getSolds());
 
         return iBooksSoldRepo.save(currentBookSoldMonth);
     }

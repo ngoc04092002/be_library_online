@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ltw.btl.model.Client.ClientEntity;
 
 import java.io.Serializable;
 
@@ -24,20 +25,12 @@ public class RatingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "one" , columnDefinition = "int default 0")
-    private Integer one;
+    @Column(name = "star" , columnDefinition = "int default 0")
+    private Integer star;
 
-    @Column(name = "two",columnDefinition = "int default 0")
-    private Integer two;
-
-    @Column(name = "three",columnDefinition = "int default 0")
-    private Integer three;
-
-    @Column(name = "four",columnDefinition = "int default 0")
-    private Integer four;
-
-    @Column(name = "five",columnDefinition = "int default 0")
-    private Integer five;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_client_rating_id", referencedColumnName = "id")
+    private ClientEntity clientEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_book_rating_id", referencedColumnName = "id")

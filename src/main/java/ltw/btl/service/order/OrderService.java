@@ -55,20 +55,24 @@ public class OrderService implements IOrderService {
              iOrderRepo.deleteAllOrderByName(names);
              return true;
         } catch (Exception ex) {
-            return false;
+            throw new ArgumentException("Sản phầm đã được thanh toán!");
         }
     }
 
     @Override
-    public OrderEntity updateOrderQuantity(Long id, Integer quantity) {
+    public OrderEntity updateOrderQuantity(Long id, Integer quantity,Boolean haveAdd) {
         final var currentOrder = iOrderRepo.getById(id);
 
-        int currentQuantity = currentOrder.getQuantity();
-        if (quantity <= 0 || quantity > currentQuantity) {
-            throw new ArgumentException("");
+        if(currentOrder==null){
+            throw new ArgumentException("Sản phầm đã được thanh toán!");
         }
 
-        int newQuantity = currentQuantity - quantity;
+        int currentQuantity = currentOrder.getQuantity();
+        if (quantity <= 0 || (!haveAdd && quantity > currentQuantity)) {
+            throw new ArgumentException("Điều chỉnh lại số lượng");
+        }
+
+        int newQuantity = haveAdd ? currentQuantity + quantity : currentQuantity - quantity;
         currentOrder.setQuantity(newQuantity);
         if (newQuantity == 0) {
             iOrderRepo.deleteById(id);
@@ -80,8 +84,13 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Boolean deleteOrderById(Long id) {
+    public Boolean deleteOrderById(Long id, Integer quantity) {
         try {
+            final var currentOrder = iOrderRepo.getById(id);
+
+            if(currentOrder==null || currentOrder.getQuantity()!=quantity){
+                throw new ArgumentException("Người dùng đã thay đổi số lượng");
+            }
             iOrderRepo.deleteById(id);
             return true;
         }catch (Exception ex){

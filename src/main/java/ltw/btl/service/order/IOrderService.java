@@ -13,7 +13,7 @@ public interface IOrderService {
 
     Boolean deleteAllOrderByName(List<String> name);
 
-    OrderEntity updateOrderQuantity(Long id,Integer quantity);
+    OrderEntity updateOrderQuantity(Long id,Integer quantity, Boolean haveAdd);
 
-    Boolean deleteOrderById(Long id);
+    Boolean deleteOrderById(Long id,Integer quantity);
 }
