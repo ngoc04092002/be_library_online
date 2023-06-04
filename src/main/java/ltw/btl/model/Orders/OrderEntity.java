@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import ltw.btl.model.Book.BookEntity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
@@ -29,7 +30,7 @@ public class OrderEntity implements Serializable {
     private String tel;
 
     @Column(name="status",nullable = false)
-    private Boolean status;
+    private Integer status;
     @Column(name="quantity",columnDefinition = "int default 0")
     private Integer quantity;
 
@@ -38,5 +39,11 @@ public class OrderEntity implements Serializable {
 
     @OneToOne
     private BookEntity books;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

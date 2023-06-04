@@ -34,9 +34,14 @@ public class OrderController {
         return  iOrderService.updateOrderQuantity(id,quantity, haveAdd);
     }
 
+    @PutMapping("update-status")
+    public Boolean updateStatus(@RequestParam Integer status,@RequestBody List<Long> id){
+        return iOrderService.updateStatus(status,id);
+    }
+
     @PostMapping("delete-order")
-    public Boolean deleteAllOrderByName(@RequestBody List<String> names){
-        return iOrderService.deleteAllOrderByName(names);
+    public Boolean deleteOrdersByIds(@RequestBody List<Long> ids){
+        return iOrderService.deleteAllOrderByIds(ids);
     }
 
     @DeleteMapping("delete-order/{id}")

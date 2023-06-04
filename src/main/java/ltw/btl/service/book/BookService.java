@@ -3,10 +3,10 @@ package ltw.btl.service.book;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import ltw.btl.dto.book.BookRequest;
-import ltw.btl.dto.book.RatingResponse;
 import ltw.btl.model.Book.BookEntity;
 import ltw.btl.model.Book.RatingEntity;
 import ltw.btl.repository.books.IBookRepo;
+import ltw.btl.repository.books.IOrderRepo;
 import ltw.btl.repository.books.IRatingRepo;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +20,8 @@ public class BookService implements IBookService {
 
     private final IBookRepo iBookRepo;
     private final IRatingRepo iRatingRepo;
+
+    private final IOrderRepo iOrderRepo;
 
     @Override
     public List<BookEntity> getAllBooks() {
@@ -101,7 +103,7 @@ public class BookService implements IBookService {
             iBookRepo.save(bookEntity);
             return "ok";
         } catch (Exception e) {
-            System.out.println("error update book"+e.getMessage());
+            System.out.println("error update book" + e.getMessage());
             return "Kiểm tra lại dữ liệu đã điền đẩy đủ chưa";
         }
     }
@@ -114,7 +116,21 @@ public class BookService implements IBookService {
 
     @Override
     public RatingEntity saveRating(RatingEntity rating) {
-        return iRatingRepo.save(rating);
+        final var existOrder = iOrderRepo.getByNameContainingIgnoreCaseAndStatusAndBooks_Id(rating.getClientEntity()
+                                                                                                    .getUsername(), 2,
+                                                                                            rating.getBookRating()
+                                                                                                    .getId());
+        if (existOrder != null) {
+            final var currentReview = iRatingRepo.findByBookRatingAndClientEntity(rating.getBookRating(),
+                                                                                  rating.getClientEntity());
+            if(currentReview!=null){
+                currentReview.setStar(rating.getStar());
+                return iRatingRepo.save(currentReview);
+            }
+            return iRatingRepo.save(rating);
+        }
+
+        return new RatingEntity();
     }
 
     @Override

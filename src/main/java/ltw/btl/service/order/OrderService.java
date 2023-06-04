@@ -29,17 +29,6 @@ public class OrderService implements IOrderService {
     @Override
     public Boolean createOrder(OrderEntity orderEntity) {
         try {
-            final var currentOrder = iOrderRepo.getByNameContainingIgnoreCase(orderEntity.getName());
-
-            if (currentOrder != null && orderEntity.getBooks()
-                    .getId() == currentOrder.getBooks()
-                    .getId()) {
-                currentOrder.setQuantity(currentOrder.getQuantity() + orderEntity.getQuantity());
-                currentOrder.setAddress(orderEntity.getAddress());
-                currentOrder.setTel(orderEntity.getTel());
-                iOrderRepo.save(currentOrder);
-                return true;
-            }
             iOrderRepo.save(orderEntity);
             return true;
         } catch (Exception ex) {
@@ -50,20 +39,20 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Boolean deleteAllOrderByName(List<String> names) {
+    public Boolean deleteAllOrderByIds(List<Long> ids) {
         try {
-             iOrderRepo.deleteAllOrderByName(names);
-             return true;
+            iOrderRepo.deleteAllOrderByIds(ids);
+            return true;
         } catch (Exception ex) {
             throw new ArgumentException("Sản phầm đã được thanh toán!");
         }
     }
 
     @Override
-    public OrderEntity updateOrderQuantity(Long id, Integer quantity,Boolean haveAdd) {
+    public OrderEntity updateOrderQuantity(Long id, Integer quantity, Boolean haveAdd) {
         final var currentOrder = iOrderRepo.getById(id);
 
-        if(currentOrder==null){
+        if (currentOrder == null) {
             throw new ArgumentException("Sản phầm đã được thanh toán!");
         }
 
@@ -84,18 +73,30 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    public Boolean updateStatus(Integer status, List<Long> id) {
+        try {
+            iOrderRepo.updateStatus(status, id);
+            return true;
+        } catch (Exception ex) {
+            throw new ArgumentException("");
+        }
+    }
+
+    @Override
     public Boolean deleteOrderById(Long id, Integer quantity) {
         try {
             final var currentOrder = iOrderRepo.getById(id);
 
-            if(currentOrder==null || currentOrder.getQuantity()!=quantity){
+            if (currentOrder == null || currentOrder.getQuantity() != quantity) {
                 throw new ArgumentException("Người dùng đã thay đổi số lượng");
             }
             iOrderRepo.deleteById(id);
             return true;
-        }catch (Exception ex){
-            System.out.println("order=>>>"+ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("order=>>>" + ex.getMessage());
             return false;
         }
     }
+
+
 }
